@@ -1,0 +1,14 @@
+services:
+  web:
+    image: almalinux:9
+    container_name: almalinux9_apache
+    volumes:
+      - ./html:/var/www/html
+    ports:
+      - "80:80"
+    command: |
+      bash -c "
+        dnf install -y httpd
+        echo '<html><body><h1>Hello, World!</h1></body></html>' > /var/www/html/index.html
+        httpd -D FOREGROUND
+      "
